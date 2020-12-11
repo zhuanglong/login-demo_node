@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var tokenUtil = require('./utils/tokenUtil');
 
 var app = express();
 
@@ -18,6 +19,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// 检验 token
+app.use(async function(req, res, next) {
+  const whiteList = ['/sign-in', '/sign-up', '/users'];
+  if (whiteList.includes(req.path)) {
+    next();
+    return;
+  }
+  try {
+    const data = await tokenUtil.checkToken(req.headers['authorization']);
+    res.locals.userinfo = data;
+    next();
+  } catch (error) {
+    res.status(401).send(error.message);
+  }
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
