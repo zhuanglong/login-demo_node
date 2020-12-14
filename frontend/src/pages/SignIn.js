@@ -1,5 +1,5 @@
 import React from 'react';
-import request from '../utils/request'
+import request from '../utils/request';
 
 class SignIn extends React.Component {
   state = {
@@ -22,16 +22,20 @@ class SignIn extends React.Component {
   onSignIn = () => {
     const { username, password } = this.state;
     request({
-      url: '/sign-in',
+      url: '/api/sign-in',
       method: 'post',
       data: {
         username,
         password
       }
-    }).then(() => {
-      //
-    }).catch(() => {
-      //
+    }).then((res) => {
+      if (res.code !== 0)  {
+        alert(res.message);
+      } else {
+        window.localStorage.setItem('token', res.data.token);
+        window.localStorage.setItem('username', res.data.username);
+        this.props.history.replace('/');
+      }
     });
   }
 

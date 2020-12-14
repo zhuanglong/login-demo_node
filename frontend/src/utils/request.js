@@ -1,11 +1,12 @@
 import axios from 'axios';
 
 const service = axios.create({
-  baseURL: 'http://location:3000/api',
+  baseURL: '/', // 如果使用了代理，请设置成'/'
   withCredentials: true,
   timeout: 5000
 });
 
+// request 拦截器
 service.interceptors.request.use(
   (config) => {
     // 不传递默认开启 loading
@@ -17,11 +18,12 @@ service.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log(`request: ${error}`);
+    console.log('=== request err === ' + error);
     return Promise.reject(error);
   }
 );
 
+// response 拦截器
 service.interceptors.response.use(
   (response) => {
     // hide loading
@@ -30,14 +32,14 @@ service.interceptors.response.use(
       if (res.status === 401) {
         // 退出登录
       }
-      return Promise.reject(res || 'error');
+      return Promise.reject(res);
     } else {
       return Promise.resolve(res);
     }
   },
   (error) => {
     // hide loading
-    console.log(`response: ${error}`);
+    console.log('=== response err === ' + error);
     return Promise.reject(error);
   }
 );
