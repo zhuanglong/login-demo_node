@@ -6,14 +6,26 @@
 
 开始项目：
 
-切换到 backend 目录
+1. 开启 mongoBD
+    
+   首先安装好 mongoDB，然后命令 `mongod --dbpath D:\Develop\DB\Mongodb\data` 启动数据库
 
-安装依赖
+   [安装教程](https://www.runoob.com/mongodb/mongodb-tutorial.html)
 
-`yarn` or `npm i`
+2. 切换到 backend 目录
 
-启动项目
+    安装依赖，`yarn` or `npm i`
 
-`npm start`
+    启动项目，`npm start`
 
 ### frontend 前端代码
+
+开始项目：
+
+> 注意，一定要先启动后端项目。
+
+1. 切换到 frontend 目录
+
+    安装依赖，`yarn`
+
+    启动项目，`npm start`

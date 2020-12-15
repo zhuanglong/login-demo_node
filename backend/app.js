@@ -32,7 +32,10 @@ app.use(async function(req, res, next) {
     res.locals.userinfo = data;
     next();
   } catch (error) {
-    res.status(401).send(error.message);
+    res.json({
+      code: 101,
+      message: error.message
+    });
   }
 });
 

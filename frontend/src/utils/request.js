@@ -1,4 +1,5 @@
 import axios from 'axios';
+import eventBus from './eventBus';
 
 const service = axios.create({
   baseURL: '/', // 如果使用了代理，请设置成'/'
@@ -28,14 +29,14 @@ service.interceptors.response.use(
   (response) => {
     // hide loading
     const res = response.data;
-    if (res.status && res.status !== 200) {
-      if (res.status === 401) {
-        // 退出登录
-      }
+    if (response.status !== 200) {
       return Promise.reject(res);
-    } else {
-      return Promise.resolve(res);
     }
+    if (res.code === 101) {
+      eventBus.fire('SignOut');
+      return Promise.reject(Error('token 失效，请重新登陆！'));
+    }
+    return Promise.resolve(res);
   },
   (error) => {
     // hide loading

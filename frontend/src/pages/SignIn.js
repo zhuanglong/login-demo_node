@@ -7,16 +7,8 @@ class SignIn extends React.Component {
     password: ''
   }
 
-  onChangeUsername = (e) => {
-    this.setState({
-      username: e.target.value
-    });
-  }
-
-  onChangePassword = (e) => {
-    this.setState({
-      password: e.target.value
-    });
+  gotoSignUp = () => {
+    this.props.history.push('/sign-up');
   }
 
   onSignIn = () => {
@@ -42,9 +34,12 @@ class SignIn extends React.Component {
   render() {
     return (
       <div>
-        <input type="text" onChange={this.onChangeUsername} placeholder="用户名" />
-        <input type="password" onChange={this.onChangePassword} placeholder="密码" />
-        <button onClick={this.onSignIn}>登录</button>
+        <h2>登陆</h2>
+        <input type="text" onChange={(event) => this.setState({ username: event.target.value })} placeholder="用户名" />
+        <p />
+        <input type="password" onChange={(event) => this.setState({ password: event.target.value })} placeholder="密码" />
+        <p />
+        <button onClick={this.onSignIn}>登录</button> | <button onClick={this.gotoSignUp}>没有账户？去注册</button>
       </div>
     );
   }

@@ -224,7 +224,10 @@ app.use(async function(req, res, next) {
     res.locals.userinfo = data;
     next();
   } catch (error) {
-    res.status(401).send(error.message);
+    res.json({
+      code: 101,
+      message: error.message
+    });
   }
 });
 ```
@@ -269,3 +272,4 @@ router.post('/members', async (req, res) => {
 - [express中实现加密JWT（JSON Web Token）](https://blog.csdn.net/u014713031/article/details/93872479)
 - [jwt与token+redis，哪种方案更好用？](https://www.zhihu.com/question/274566992)
 - [深入了解jwt方案的优缺点](https://www.cnblogs.com/nangec/p/12687258.html)
+- [JWT 安全性 讨论](https://www.v2ex.com/t/375908)
