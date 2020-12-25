@@ -1,3 +1,5 @@
+[express-jwt 项目地址](https://github.com/zhuanglong/login-demo_node/tree/express-jwt)
+
 ## JWT 理解
 
 > JWT(json web token) 是为了在网络应用环境间传递声明而执行的一种基于 JSON 的开放标准。（json 格式传 token）
@@ -33,6 +35,8 @@ JWT 的声明一般被用来在身份提供者和服务提供者间传递被认�
 > 项目环境：
 > - 基于 express-generator 初始化的 express 项目。
 > - MongoDB 数据库。
+
+<font color="red">注：端口已修改为 9090。</font>
 
 express-generator 初始化的项目，结构如下：
 
@@ -273,3 +277,4 @@ router.post('/members', async (req, res) => {
 - [jwt与token+redis，哪种方案更好用？](https://www.zhihu.com/question/274566992)
 - [深入了解jwt方案的优缺点](https://www.cnblogs.com/nangec/p/12687258.html)
 - [JWT 安全性 讨论](https://www.v2ex.com/t/375908)
+- [前后端分离，用 React/Vue 框架下，用户权限应该用 cookie 验证？还是 token 验证？](https://www.v2ex.com/t/737483#reply33)
